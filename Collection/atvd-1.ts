@@ -1,55 +1,45 @@
 // Importar com require para CommonJS
 import readlineSync = require('readline-sync');
 
-// local das variaveis aqui a gente coloca o array tb 
-const lisDeCores: string[] = new Array <string> ("", "", "", "", "");
-const CoresOrdenadas: string[] = new Array <string> ("", "", "", "", "");
+// Declara o array para armazenar as cores
+const lisDeCores: string[] = [];
+
 let contador: number = 0;
 
-// pedir as 5 cores -fazer um for quando for pedir mais de uma vez a msm coisa
-for (contador = 0; contador < 5; contador = contador + 1) {
+console.log("Olá! Vamos criar uma lista de cores.");
+console.log("Por favor, digite 5 cores diferentes:");
+console.log("");
+
+// Laço para pedir as 5 cores ao usuário
+for (contador = 0; contador < 5; contador++) {
+    const corDigitada = readlineSync.question("Digite a " + (contador + 1) + "ª cor: ")!;
     
-    // Pedindo cada cor ao usuário-começa a pedir por um e vai incrementando 
-    const corDigitada = readlineSync.question("Digite a " + (contador + 1) + " cor: ");
-    
-    // Verificando se a entrada não é undefined - eu achei oura forma de fazer isso sem
-    //precisar verificar, e lá em cima faz assim const lisDeCores: string[] = new Array<string>();
-    // dps usa um  lisDeCores.push(corDigitada);
-    if (corDigitada !== undefined) {
-      // Atribuin a cor à lista se ela for uma string
-      lisDeCores[contador] = corDigitada;
-    } else {
-      // Se for undefined, atribua uma string vazia para evitar o erro
-      lisDeCores[contador] = "";
-    }
+    // Adiciona a cor diretamente ao final do array
+    lisDeCores.push(corDigitada);
 }
 
-console.log(""); //pula linha
+console.log("\n=== RESULTADOS ===");
+console.log("");
 
-// Mostra as cores digitadas
-console.log(" todas as cores:");
-
-let indice: number = 0;
-for (indice = 0; indice < 5; indice = indice + 1) {
-    let corAtual: string = lisDeCores[indice];
-    console.log(corAtual);
+// Exibe as cores na ordem em que foram digitadas
+console.log("Todas as cores que você digitou:");
+for (let i = 0; i < lisDeCores.length; i++) {
+    console.log(`${i + 1}. ${lisDeCores[i]}`);
 }
 
 console.log("");
 
-// Copiando as cores para outra lista
-let posicaoCopia: number = 0;
-for (posicaoCopia = 0; posicaoCopia < 5; posicaoCopia = posicaoCopia + 1) {
-    CoresOrdenadas[posicaoCopia] = lisDeCores[posicaoCopia];
-}
+// Cria uma cópia do array para ordenar
+const CoresOrdenadas = [...lisDeCores];
 
-// Ordenando as cores
+// Ordena as cores em ordem alfabética
 CoresOrdenadas.sort();
 
-// Mostrando as cores ordenadas
-console.log("Ordem alfabetica:"); //aqui foi babado
-let posicao: number = 0;
-for (posicao = 0; posicao < 5; posicao = posicao + 1) {
-    let corOrdenada: string = CoresOrdenadas[posicao];
-    console.log(corOrdenada);
+console.log("Cores em ordem alfabética:");
+
+// Exibe as cores ordenadas
+for (let i = 0; i < CoresOrdenadas.length; i++) {
+    console.log(`${i + 1}. ${CoresOrdenadas[i]}`);
 }
+
+console.log("\nPrograma finalizado! Obrigada por participar!");
